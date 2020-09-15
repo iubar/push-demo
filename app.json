@@ -16,9 +16,12 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "useNextNotificationsApi": true
+    },    
     "ios": {
       "supportsTablet": true
-    },
+    },    
     "web": {
       "favicon": "./assets/favicon.png"
     }
