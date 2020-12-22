@@ -30,6 +30,7 @@ export default class App extends React.Component {
           ),
         }}
         />
+		
       <Tab.Screen name="Tab2" component={ReceivingScreen} options={{
           tabBarLabel: 'Receiving',
           tabBarIcon: ({ color, size }) => (
@@ -39,6 +40,15 @@ export default class App extends React.Component {
         }}
       />
 
+		
+	<Tab.Screen name="Tab3" component={Tab3Screen} options={{
+          tabBarLabel: 'Local',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+        />
+		
             <Tab.Screen name="Tab4" component={ExampleScreen} options={{
           tabBarLabel: 'Example',
           tabBarIcon: ({ color, size }) => (
