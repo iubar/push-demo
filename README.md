@@ -1,6 +1,6 @@
 # push-demo
 
-[![Build Status](https://travis-ci.com/iubar/push-demo.svg?branch=master)](https://travis-ci.com/iubar/push-demo)
+[![Build Status](https://app.travis-ci.com/iubar/push-demo.svg?branch=master)](https://app.travis-ci.com/github/iubar/push-demo)
 
 Live version: https://snack.expo.io/@git/github.com/iubar/push-demo
 
