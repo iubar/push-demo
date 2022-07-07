@@ -77,9 +77,38 @@ export default function ExampleScreen() {
         }}
       />
 
+    <Button
+        title="schedule and cancel"
+        onPress={async () => {
+          await scheduleAndCancel();
+        }}
+      />
+
+    <Button
+        title="Cancel all scheduled notifications"
+        onPress={async () => {
+          await cancelAllScheduledNotificationsAsync();
+        }}
+      />
+
+
     </View>
   );
  
+  async function cancelAllScheduledNotificationsAsync() {
+    const identifier = await Notifications.cancelAllScheduledNotificationsAsync();
+    console.log("Done: canceled All Scheduled Notification");
+  }
+
+  async function scheduleAndCancel() {
+    const identifier = await Notifications.scheduleNotificationAsync({
+      content: {
+        title: 'Hey!',
+      },
+      trigger: { seconds: 5, repeats: true },
+    });
+    await Notifications.cancelScheduledNotificationAsync(identifier);
+  }
 
 // Can use this function below, OR use Expo's Push Notification Tool-> https://expo.io/dashboard/notifications
 async function sendPushNotification(expoPushToken) {
