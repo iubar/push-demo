@@ -2,21 +2,15 @@ import React from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
-import * as Permissions from 'expo-permissions';
-
 
 export default class Tab1Screen extends React.Component {
- 
   
   state = {
     permissionMsg: ''
   };
 
- 
-
   constructor(props){
     super(props);
- 
   }
  
   async componentDidMount() {
@@ -24,7 +18,14 @@ export default class Tab1Screen extends React.Component {
     if (!Constants.isDevice){
       msg = 'It\'s not a device so there is no notification support'
     }else{
-      let result = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+      let result = await Notifications.requestPermissionsAsync({
+        ios: {
+          allowAlert: true,
+          allowBadge: true,
+          allowSound: true,
+          allowAnnouncements: true,
+        },
+      });
       if (result.status === 'granted') {
         msg  = 'Notification permissions granted.';
       }else{

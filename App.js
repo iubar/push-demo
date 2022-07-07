@@ -8,9 +8,8 @@ import Tab1Screen from './src/screens/Tab1Screen';
 import ReceivingScreen from './src/screens/ReceivingScreen';
 import Tab3Screen from './src/screens/Tab3Screen';
 import ExampleScreen from './src/screens/ExampleScreen';
- 
-
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
 const Tab = createMaterialTopTabNavigator();
 
 export default class App extends React.Component {
@@ -36,7 +35,6 @@ export default class App extends React.Component {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="bell" color={color} size={size} />
           ),
-          tabBarBadge: 3,
         }}
       />
 

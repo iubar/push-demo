@@ -1,23 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
-import * as Permissions from 'expo-permissions';
+import { StyleSheet, Button, Text, View, Dimensions, TouchableOpacity } from 'react-native';
+import * as Notifications from 'expo-notifications';
 
 export default class Tab3Screen extends React.Component {
- 
   
   state = {
     
   };
 
- 
   constructor(props){
-    super(props);
- 
+    super(props); 
   }
  
 askPermissions = async () => {
 	console.log('askPermissions');
-    let permission = await Permissions.getAsync(Permissions.USER_FACING_NOTIFICATIONS); // Permissions.NOTIFICATIONS
+    let permission = await Notifications.getPermissionsAsync();
     if (permission.status === 'granted') {
        console.log("You didn't get permission")
       }
@@ -26,7 +23,7 @@ askPermissions = async () => {
 
 sendNotificationImmediately = async () => {
 	console.log('sendNotificationImmediately');
-	await this.getPermission();
+	await Notifications.getPermission();
   let notificationId = await Notifications.presentLocalNotificationAsync({
     title: 'This is crazy',
     body: 'Your mind will blow after reading this',
