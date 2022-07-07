@@ -60,12 +60,12 @@ export default function ExampleScreen() {
 <Button
         title="Schedule a local notification"
         onPress={async () => {
-          await scheduleLocalNotification();
+          await sendLocalNotification2();
         }}
       />      
 
       <Button
-        title="Schedule a (push ?) notification"
+        title="Schedule a local notification (alternative)"
         onPress={async () => {
           await schedulePushNotification();
         }}
@@ -112,8 +112,6 @@ async function schedulePushNotification() {
   });
 }
 
-
-
 async function sendLocalNotification() {
   let localNotification = {    
     title: 'New Message',
@@ -122,26 +120,25 @@ async function sendLocalNotification() {
       channelId: 'chat-messages',
     }
   };
-  await Notifications.presentLocalNotificationAsync(
-    localNotification
-  );
+  await Notifications.scheduleNotificationAsync({
+    content: localNotification,
+    trigger: null // null means local notification
+  });
 }
 
-async function scheduleLocalNotification() {
+async function sendLocalNotification2() {
   let localNotification = {    
-    title: 'New scheduled Message',
-    body: 'Message!!!!',
-    android: {
-      channelId: 'chat-messages',
-    }
+    title: "You've got mail! 📬",
+    body: 'Here is the notification body',
+    data: { data: 'goes here' },
   };
   const schedulingOptions = {
     time: new Date().getTime() + Number(3000)
   };  
-  await Notifications.scheduleLocalNotificationAsync(
-    localNotification,
-    schedulingOptions
-  );
+  await Notifications.scheduleNotificationAsync({
+    content: localNotification,
+    trigger: null // null means local notification
+  });
 }
 
 async function registerForPushNotificationsAsync() {

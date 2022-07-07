@@ -20,37 +20,55 @@ askPermissions = async () => {
       }
     return permission;
 }
+ 
+  schedulePushNotification = async () => {  
+  await Notifications.scheduleNotificationAsync({
+    content: {
+      title: "You've got mail! 📬",
+      body: 'Here is the notification body',
+      data: { data: 'goes here' },
+    },
+    trigger: { seconds: 2 },
+  });
+}
 
 sendNotificationImmediately = async () => {
 	console.log('sendNotificationImmediately');
-	await Notifications.getPermission();
-  let notificationId = await Notifications.presentLocalNotificationAsync({
-    title: 'This is crazy',
-    body: 'Your mind will blow after reading this',
+ 
+  let notificationId = await Notifications.scheduleNotificationAsync({
+    content: {
+      title: 'This is crazy',
+      body: 'Your mind will blow after reading this',
+    },
 	ios: {
-		sound: true
+    allowAlert: true,
+    allowBadge: true,
+    allowSound: true,
+    allowAnnouncements: true,
 	},
 	android: {
 		sound: true,
 		vibrate: true,
 		color: '#512DA8'
-    }	
+    },
+  trigger: null // null means local notification  
   });
+
   console.log(notificationId); // can be saved in AsyncStorage or send to server
 };
 
 scheduleNotification = async () => {
 	console.log('scheduleNotification');
-  let notificationId = Notifications.scheduleLocalNotificationAsync(
-    {
-      title: "I'm Scheduled",
+  let notificationId = Notifications.scheduleNotificationAsync({
+    content: {
+      title: "I'm a notification",
       body: 'Wow, I can show up even when app is closed',
     },
-    {
-      repeat: 'minute',
-      time: new Date().getTime() + 10000,
-    },
-  );
+    trigger: {
+      seconds: 20, // seconds
+      repeats: true,
+    },    
+  });
   console.log(notificationId);
 };
  

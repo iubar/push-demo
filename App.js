@@ -14,6 +14,8 @@ const Tab = createMaterialTopTabNavigator();
 
 export default class App extends React.Component {
  
+  
+
   /**
    * @see https://github.com/facebook/react-native/issues/22211#issuecomment-667034125
    */
@@ -35,7 +37,7 @@ export default class App extends React.Component {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="bell" color={color} size={size} />
           ),
-          tabBarBadge: 2,
+          tabBarBadge:()=> { return ( <Text>31</Text> ) }
         }}
       />
 
