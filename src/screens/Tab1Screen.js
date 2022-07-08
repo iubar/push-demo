@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
-import Constants from 'expo-constants';
+import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 
 export default class Tab1Screen extends React.Component {
@@ -15,7 +15,7 @@ export default class Tab1Screen extends React.Component {
  
   async componentDidMount() {
     let msg = '';
-    if (!Constants.isDevice){
+    if (!Device.isDevice){
       msg = 'It\'s not a device so there is no notification support'
     }else{
       let result = await Notifications.requestPermissionsAsync({
