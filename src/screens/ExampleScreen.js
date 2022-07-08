@@ -1,8 +1,14 @@
-import Constants from 'expo-constants';
+import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import React, { useState, useEffect, useRef } from 'react';
 import { Text, View, Button, Platform } from 'react-native';
 
+/**
+ * When a notification is received while the app is running, using this function you can set a callback that will decide whether the notification should be shown to the user or not.
+ * 
+ * Implementing a notification handler that always shows the notification when it is received
+ * 
+ */
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -58,14 +64,14 @@ export default function ExampleScreen() {
       />
 
 <Button
-        title="Schedule a local notification"
+        title="Send a local notification (alternative)"
         onPress={async () => {
           await sendLocalNotification2();
         }}
       />      
 
       <Button
-        title="Schedule a local notification (alternative)"
+        title="Schedule a local notification"
         onPress={async () => {
           await schedulePushNotification();
         }}
@@ -78,7 +84,7 @@ export default function ExampleScreen() {
       />
 
     <Button
-        title="schedule and cancel"
+        title="Schedule and cancel"
         onPress={async () => {
           await scheduleAndCancel();
         }}
@@ -137,7 +143,7 @@ async function schedulePushNotification() {
       body: 'Here is the notification body from Example 2',
       data: { data: 'goes here' },
     },
-    trigger: { seconds: 1 },
+    trigger: { seconds: 2 },
   });
 }
 
@@ -161,9 +167,9 @@ async function sendLocalNotification2() {
     body: 'Here is the notification body',
     data: { data: 'goes here' },
   };
-  const schedulingOptions = {
-    time: new Date().getTime() + Number(3000)
-  };  
+//  const schedulingOptions = {
+//    time: new Date().getTime() + Number(3000)
+//  };  
   await Notifications.scheduleNotificationAsync({
     content: localNotification,
     trigger: null // null means local notification
@@ -172,7 +178,7 @@ async function sendLocalNotification2() {
 
 async function registerForPushNotificationsAsync() {
   let token;
-  if (Constants.isDevice) {
+  if (Device.isDevice) {
     const { status: existingStatus } = await Notifications.getPermissionsAsync();
     let finalStatus = existingStatus;
     if (existingStatus !== 'granted') {
