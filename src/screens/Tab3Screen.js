@@ -19,7 +19,7 @@ export default class Tab3Screen extends React.Component {
 	};
 
 	schedulePushNotification = async () => {
-		await Notifications.scheduleNotificationAsync({
+		let notificationId = await Notifications.scheduleNotificationAsync({
 			content: {
 				title: "You've got mail! 📬",
 				body: 'Here is the notification body',
@@ -54,9 +54,9 @@ export default class Tab3Screen extends React.Component {
 		console.log(notificationId); // can be saved in AsyncStorage or send to server
 	};
 
-	scheduleNotification = async () => {
+	scheduleRepeatingNotification = async () => {
 		console.log('scheduleNotification');
-		let notificationId = Notifications.scheduleNotificationAsync({
+		let notificationId = await Notifications.scheduleNotificationAsync({
 			content: {
 				title: "I'm a notification",
 				body: 'Wow, I can show up even when app is closed',
@@ -69,13 +69,20 @@ export default class Tab3Screen extends React.Component {
 		console.log(notificationId);
 	};
 
+	cancelAllScheduledNotifications = async () => {
+		console.log('cancelAllScheduledNotifications');
+		let notificationId = await  Notifications.cancelAllScheduledNotificationsAsync();
+		console.log(JSON.stringify(notificationId));
+	};
+
 	render() {
 		return (
 			<View style={{ flex: 1 }}>
 				<View style={{ backgroundColor: 'black', height: 100, justifyContent: 'center', alignItems: 'center' }}>
 					<Text style={{ color: 'white' }}>Hello 3 ?!</Text>
 					<Button title="Send local notification" onPress={this.sendNotificationImmediately} />
-					<Button title="Schedule a notification" onPress={this.scheduleNotification} />
+					<Button title="Schedule a repeating notification" onPress={this.scheduleRepeatingNotification} />
+					<Button title="Cancel All scheduled notifications " onPress={this.cancelAllScheduledNotifications} />
 				</View>
 			</View>
 		);
