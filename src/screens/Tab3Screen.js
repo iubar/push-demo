@@ -66,12 +66,19 @@ export default class Tab3Screen extends React.Component {
 				repeats: true,
 			},
 		});
+		// FACOLTATIVO: await Notifications.cancelScheduledNotificationAsync(notificationId);
 		console.log(notificationId);
 	};
 
 	cancelAllScheduledNotifications = async () => {
 		console.log('cancelAllScheduledNotifications');
-		let notificationId = await  Notifications.cancelAllScheduledNotificationsAsync();
+		let notificationId = await Notifications.cancelAllScheduledNotificationsAsync();
+		console.log(JSON.stringify(notificationId));
+	};
+
+	dismissAllNotificationsAsync = async () => {
+		console.log('cancelAllScheduledNotifications');
+		let notificationId = await Notifications.dismissAllNotificationsAsync();
 		console.log(JSON.stringify(notificationId));
 	};
 
@@ -82,7 +89,8 @@ export default class Tab3Screen extends React.Component {
 					<Text style={{ color: 'white' }}>Hello 3 ?!</Text>
 					<Button title="Send local notification" onPress={this.sendNotificationImmediately} />
 					<Button title="Schedule a repeating notification" onPress={this.scheduleRepeatingNotification} />
-					<Button title="Cancel All scheduled notifications " onPress={this.cancelAllScheduledNotifications} />
+					<Button title="Cancel all scheduled notifications" onPress={this.cancelAllScheduledNotifications} />
+					<Button title="Dismiss all scheduled notifications" onPress={this.dismissAllNotificationsAsync} />
 				</View>
 			</View>
 		);
