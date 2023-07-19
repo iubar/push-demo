@@ -16,14 +16,18 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "android": {
-      
-    },    
+    "android": {},
     "ios": {
       "supportsTablet": true
-    },    
+    },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "84836257-9547-4a85-a6da-b20ab947cde0"
+      }
+    },
+    "owner": "borgo"
   }
 }
