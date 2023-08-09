@@ -194,7 +194,14 @@ export default function ExampleScreen() {
 				alert('Failed to get push token for push notification!');
 				return;
 			}
-			token = (await Notifications.getExpoPushTokenAsync()).data;
+
+			// const projectId = options.projectId || Constants.easConfig?.projectId || Constants.expoConfig.extra?.eas?.projectId;
+			const projectId = Constants.expoConfig.extra.eas.projectId;
+			const res = await Notifications.getExpoPushTokenAsync({
+				'projectId': projectId,
+			});
+			
+			token = res.data;
 			console.log('ExpoPushToken: ' + token);
 		} else {
 			alert('Must use physical device for Push Notifications');
