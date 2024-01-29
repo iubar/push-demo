@@ -2,6 +2,7 @@ import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import React, { useState, useEffect, useRef } from 'react';
 import { Text, View, Button, Platform } from 'react-native';
+import Constants from 'expo-constants';
 
 /**
  * When a notification is received while the app is running, using this function you can set a callback that will decide whether the notification should be shown to the user or not.
