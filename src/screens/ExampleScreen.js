@@ -200,7 +200,7 @@ export default function ExampleScreen() {
 			const res = await Notifications.getExpoPushTokenAsync({
 				'projectId': projectId,
 			});
-			
+
 			token = res.data;
 			console.log('ExpoPushToken: ' + token);
 		} else {
